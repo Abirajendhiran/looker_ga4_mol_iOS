@@ -1,5 +1,6 @@
-view: sessions_events {
+view: events {
  derived_table: {
+  datagroup_trigger: ga4_mol_ios_default_datagroup
   partition_keys: ["session_date"]
   cluster_keys: ["sl_key","user_id","session_date"]
   increment_key: "session_date"
@@ -55,4 +56,19 @@ dimension: session_date {
   hidden: yes
   sql: ${TABLE}.session_date;;
 }
+
+  dimension: event_date {
+    type: date
+    sql: ${TABLE}.event_date;;
+  }
+
+  dimension: stream_id {
+    type: string
+    sql: ${TABLE}.stream_id ;;
+  }
+
+  dimension: event_name {
+    type: string
+    sql: ${TABLE}.event_name ;;
+  }
  }
